@@ -159,7 +159,7 @@ module.exports = (robot) ->
       if match == "rob"
         msg.send "Nice try."
       else
-        msg.send "\"#{match}\" has #{karma.get(match)} karma. Congratulations."
+        msg.send "\"#{match}\" has #{karma.get(match)} karma. You must be proud."
 
   ###
   # Listen for "karma set x val" and set x to karma
