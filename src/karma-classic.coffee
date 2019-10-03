@@ -50,6 +50,11 @@ class Karma
     @cache[thing] ?= 0
     @cache[thing] -= 1
     @robot.brain.data.karma = @cache
+    
+  assign: (thing, val) ->
+    @cache[thing] ?= 0
+    @cache[thing] = val
+    @robot.brain.data.karma = @cache
 
   incrementResponse: ->
     @increment_responses[Math.floor(Math.random() * @increment_responses.length)]
@@ -144,4 +149,12 @@ module.exports = (robot) ->
     match = msg.match[1].toLowerCase()
     if not (match in ["best", "worst"])
       msg.send "\"#{match}\" has #{karma.get(match)} karma."
+
+  ###
+  # Listen for "karma set x val" and set x to karma
+  ###
+  robot.respond /karma set (\S+[^-\s]) (-?\d+)$/i, (msg) ->
+    subject = msg.match[1].toLowerCase()
+    val = +msg.match[2]
+    karma.assign subject, val
 
