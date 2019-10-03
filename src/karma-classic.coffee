@@ -91,7 +91,7 @@ module.exports = (robot) ->
     if subject == "rob"
       num = Math.floor(Math.random() * 2)
       if num
-        msg.send "http://gph.is/1COSiIC"
+        msg.send "https://i.imgur.com/zFC8Pp4.jpg"
       else
         msg.send "That didn't work."
     else
@@ -106,7 +106,7 @@ module.exports = (robot) ->
     if subject == "rob"
       num = Math.floor(Math.random() * 2)
       if num
-        msg.send "http://gph.is/1COSiIC"
+        msg.send "https://media.giphy.com/media/Mir5fnHxvXrTa/giphy.gif"
       else
         msg.send "That didn't work."
     else
