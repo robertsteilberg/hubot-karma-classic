@@ -156,7 +156,10 @@ module.exports = (robot) ->
   robot.respond /karma (\S+[^-\s])$/i, (msg) ->
     match = msg.match[1].toLowerCase()
     if not (match in ["best", "worst"])
-      msg.send "\"#{match}\" has #{karma.get(match)} karma."
+      if match == "rob"
+        msg.send "Nice try."
+      else
+        msg.send "\"#{match}\" has #{karma.get(match)} karma. Congratulations."
 
   ###
   # Listen for "karma set x val" and set x to karma
