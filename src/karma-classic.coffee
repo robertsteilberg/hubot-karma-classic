@@ -83,18 +83,24 @@ module.exports = (robot) ->
   ###
   robot.hear /@?(\S+[^+\s])\+\+(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
-    karma.increment subject
-    msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
+    if subject == "rob"
+      msg.send "https://i.imgur.com/SMWsd20.jpg"
+    else
+      karma.increment subject
+      msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
 
   ###
   # Listen for "--" messages and decrement
   ###
   robot.hear /@?(\S+[^-\s])--(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
-    # avoid catching HTML comments
-    unless subject[-2..] == "<!"
-      karma.decrement subject
-      msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
+    if subject == "rob"
+      msg.send "http://gph.is/1COSiIC"
+    else
+      # avoid catching HTML comments
+      unless subject[-2..] == "<!"
+        karma.decrement subject
+        msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
 
   ###
   # Listen for "karma empty x" and empty x's karma
