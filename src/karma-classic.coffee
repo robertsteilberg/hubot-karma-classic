@@ -89,7 +89,11 @@ module.exports = (robot) ->
   robot.hear /@?(\S+[^+\s])\+\+(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
     if subject == "rob"
-      msg.send "https://i.imgur.com/SMWsd20.jpg"
+      num = Math.floor(Math.random() * 2)
+      if num
+        msg.send "http://gph.is/1COSiIC"
+      else
+        msg.send "That didn't work."
     else
       karma.increment subject
       msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
@@ -100,7 +104,11 @@ module.exports = (robot) ->
   robot.hear /@?(\S+[^-\s])--(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
     if subject == "rob"
-      msg.send "http://gph.is/1COSiIC"
+      num = Math.floor(Math.random() * 2)
+      if num
+        msg.send "http://gph.is/1COSiIC"
+      else
+        msg.send "That didn't work."
     else
       # avoid catching HTML comments
       unless subject[-2..] == "<!"
