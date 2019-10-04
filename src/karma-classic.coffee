@@ -89,7 +89,7 @@ module.exports = (robot) ->
   robot.hear /@?(\S+[^+\s])\+\+(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
     if subject == "rob"
-      num = Math.floor(Math.random() * 2)
+      num = 0
       if num
         msg.send "https://i.imgur.com/zFC8Pp4.jpg"
       else
@@ -104,7 +104,7 @@ module.exports = (robot) ->
   robot.hear /@?(\S+[^-\s])--(\s|$)/, (msg) ->
     subject = msg.match[1].toLowerCase()
     if subject == "rob"
-      num = Math.floor(Math.random() * 2)
+      num = 0
       if num
         msg.send "https://media.giphy.com/media/Mir5fnHxvXrTa/giphy.gif"
       else
