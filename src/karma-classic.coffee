@@ -50,7 +50,7 @@ class Karma
     @cache[thing] ?= 0
     @cache[thing] -= 1
     @robot.brain.data.karma = @cache
-    
+
   assign: (thing, val) ->
     @cache[thing] ?= 0
     @cache[thing] = val
@@ -91,12 +91,15 @@ module.exports = (robot) ->
     if subject == "rob"
       num = 0
       if num
-        msg.send "https://i.imgur.com/zFC8Pp4.jpg"
+#        msg.send "https://i.imgur.com/zFC8Pp4.jpg"
+        msg.send(rickroll())
       else
-        msg.send "That didn't work."
+#        msg.send "That didn't work."
+        msg.send(rickroll())
     else
       karma.increment subject
-      msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
+#      msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
+        msg.send(rickroll())
 
   ###
   # Listen for "--" messages and decrement
@@ -106,14 +109,17 @@ module.exports = (robot) ->
     if subject == "rob"
       num = 0
       if num
-        msg.send "https://media.giphy.com/media/Mir5fnHxvXrTa/giphy.gif"
+#        msg.send "https://media.giphy.com/media/Mir5fnHxvXrTa/giphy.gif"
+        msg.send(rickroll())
       else
-        msg.send "That didn't work."
+#        msg.send "That didn't work."
+        msg.send(rickroll())
     else
       # avoid catching HTML comments
       unless subject[-2..] == "<!"
         karma.decrement subject
-        msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
+#        msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
+        msg.send(rickroll())
 
   ###
   # Listen for "karma empty x" and empty x's karma
@@ -121,7 +127,8 @@ module.exports = (robot) ->
   robot.respond /karma empty ?(\S+[^-\s])$/i, (msg) ->
     subject = msg.match[1].toLowerCase()
     karma.kill subject
-    msg.send "#{subject} has had its karma scattered to the winds."
+#    msg.send "#{subject} has had its karma scattered to the winds."
+      msg.send(rickroll())
 
   ###
   # Function that handles best and worst list
@@ -136,7 +143,8 @@ module.exports = (robot) ->
       verbiage[0] = verbiage[0].concat(" ", count.toString())
     for item, rank in rankingFunction(count)
       verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
-    msg.send verbiage.join("\n")
+#    msg.send verbiage.join("\n")
+    msg.send(rickroll())
 
   ###
   # Listen for "karma best [n]" and return the top n rankings
@@ -157,9 +165,11 @@ module.exports = (robot) ->
     match = msg.match[1].toLowerCase()
     if not (match in ["best", "worst"])
       if match == "rob"
-        msg.send "Nice try."
+#        msg.send "Nice try."
+        msg.send(rickroll())
       else
-        msg.send "\"#{match}\" has #{karma.get(match)} karma. You must be proud."
+#        msg.send "\"#{match}\" has #{karma.get(match)} karma. You must be proud."
+        msg.send(rickroll())
 
   ###
   # Listen for "karma set x val" and set x to karma
@@ -169,3 +179,19 @@ module.exports = (robot) ->
     val = +msg.match[2]
     karma.assign subject, val
 
+rickroll = ->
+  num = Math.floor(Math.random() * 11)
+  v = Math.floor(Math.random() * 10000)
+  result = switch num
+    when 0 then "https://media.giphy.com/media/629l2uUvy0uyc/giphy.gif"
+    when 1 then "https://media.giphy.com/media/2EibPB1gfjHy0/giphy.gif"
+    when 2 then "https://media.giphy.com/media/quXLseRWeh928/giphy.gif"
+    when 3 then "https://media.giphy.com/media/P4SxYsjDqQwM0/giphy.gif"
+    when 4 then "https://media.giphy.com/media/P4SxYsjDqQwM0/giphy.gif"
+    when 5 then "https://media.giphy.com/media/LrmU6jXIjwziE/giphy.gif"
+    when 6 then "https://media.giphy.com/media/sXX6ZPYWMNkwU/giphy.gif"
+    when 7 then "https://media.giphy.com/media/6LG8fcerztuxy/giphy.gif"
+    when 8 then "https://media.giphy.com/media/g7GKcSzwQfugw/giphy.gif"
+    when 9 then "https://media.giphy.com/media/lgcUUCXgC8mEo/giphy.gif"
+    when 10 then "https://media.giphy.com/media/4SoPtOQAOANMs/giphy.gif"
+  result + "?v=" + v
