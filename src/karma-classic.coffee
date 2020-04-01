@@ -98,8 +98,8 @@ module.exports = (robot) ->
         msg.send(rickroll())
     else
       karma.increment subject
-#      msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
-        msg.send(rickroll())
+      #      msg.send "#{subject} #{karma.incrementResponse()} (Karma: #{karma.get(subject)})"
+      msg.send(rickroll())
 
   ###
   # Listen for "--" messages and decrement
@@ -115,10 +115,10 @@ module.exports = (robot) ->
 #        msg.send "That didn't work."
         msg.send(rickroll())
     else
-      # avoid catching HTML comments
+# avoid catching HTML comments
       unless subject[-2..] == "<!"
         karma.decrement subject
-#        msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
+        #        msg.send "#{subject} #{karma.decrementResponse()} (Karma: #{karma.get(subject)})"
         msg.send(rickroll())
 
   ###
@@ -127,8 +127,8 @@ module.exports = (robot) ->
   robot.respond /karma empty ?(\S+[^-\s])$/i, (msg) ->
     subject = msg.match[1].toLowerCase()
     karma.kill subject
-#    msg.send "#{subject} has had its karma scattered to the winds."
-      msg.send(rickroll())
+    #    msg.send "#{subject} has had its karma scattered to the winds."
+    msg.send(rickroll())
 
   ###
   # Function that handles best and worst list
@@ -143,7 +143,7 @@ module.exports = (robot) ->
       verbiage[0] = verbiage[0].concat(" ", count.toString())
     for item, rank in rankingFunction(count)
       verbiage.push "#{rank + 1}. #{item.name} - #{item.karma}"
-#    msg.send verbiage.join("\n")
+    #    msg.send verbiage.join("\n")
     msg.send(rickroll())
 
   ###
